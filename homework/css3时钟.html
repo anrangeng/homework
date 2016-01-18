@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0;}
+#clock{ width:300px; height:300px; border-radius:50%; margin:100px auto; position:relative; top:0; left:0;}
+#clock .circle{ width:20px; height:20px; background:#F93; border-radius:50%; position:absolute; top:50%; left:50%; margin-left:-10px; margin-top:-10px;}
+#clock .hou{ width:6px; height:80px; background:#33F; position:absolute; top:70px; left:50%; margin-left:-3px; -webkit-transform-origin:bottom center; }
+#clock .min{ width:4px; height:120px; background:#33F; position:absolute; top:30px; left:50%; margin-left:-2px; -webkit-transform-origin:bottom center; }
+#clock .sec{ width:2px; height:140px; background:#F93; position:absolute; top:10px; left:50%; margin-left:-1px; -webkit-transform-origin:bottom center; }
+#clock .scale{ width:4px; height:6px; background:#63F; position:absolute; top:0; left:50%; margin-left:-2px; -webkit-transform-origin:center 150px; }
+#clock .big_scale{ width:4px; height:12px; background:#63F; position:absolute; top:0; left:50%; margin-left:-2px; -webkit-transform-origin:center 150px; }
+#clock em{ position:absolute; top:15px; left:50%; margin-left:-15px; width:30px; font-style:normal; font-weight:bold; text-align:center; color:#63F; font-size:18px;}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+	var oC = document.querySelector('#clock');
+	var oHou = document.querySelector('.hou');
+	var oMin = document.querySelector('.min');
+	var oSec = document.querySelector('.sec');
+	for(var i = 0;i<60;i++){
+		var oS = document.createElement('span');
+		if(i%5==0){
+			oS.className = 'big_scale';
+			var oEm = document.createElement('em');
+			if(i==0){
+				oEm.innerHTML = 12;
+			}else{
+				oEm.innerHTML = i/5;
+			}
+			oEm.style.WebkitTransform = 'rotate('+-i*6+'deg)';
+			oS.appendChild(oEm);
+		}else{
+			oS.className = 'scale';
+		}
+		oC.appendChild(oS);
+		oS.style.WebkitTransform = 'rotate('+i*6+'deg)';
+	}
+	function tick(){
+		var oDate = new Date();
+		oHou.style.WebkitTransform = 'rotate('+(oDate.getHours()+oDate.getMinutes()/60)*30+'deg)';
+		oMin.style.WebkitTransform = 'rotate('+(oDate.getMinutes()+oDate.getSeconds()/60)*6+'deg)';
+		oSec.style.WebkitTransform = 'rotate('+oDate.getSeconds()*6+'deg)';
+	}
+	tick();
+	setInterval(tick,1000);
+},false);
+</script>
+</head>
+
+<body>
+<div id="clock">
+	<div class="hou"></div>
+	<div class="min"></div>
+	<div class="sec"></div>
+    <div class="circle"></div>
+</div>
+</body>
+</html>

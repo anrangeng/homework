@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0;}
+#box { width:700px; height:400px; margin:100px auto; position:relative; top:0; left:0;}
+#box span{ position:absolute; -webkit-transform-style:preserve-3d; -webkit-transform:perspective(800px) rotateY(0deg);}
+#box span em{ position:absolute; top:0; left:0; width:100%; height:100%;}
+#box span .front{ -webkit-transform:translateZ(1px); background:url(img/1.jpg) no-repeat;}
+#box span .back{ -webkit-transform:translateZ(-1px) ; background:url(img/2.jpg) no-repeat;}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+	var oBtn = document.getElementsByTagName('input')[0];
+	var oBox = document.getElementById('box');
+	var R = 4;
+	var C = 7;
+	for(var i = 0;i<R;i++){
+		for(var j = 0;j<C;j++){
+			var oS = document.createElement('span');
+			oS.innerHTML = '<em class="front"></em><em class="back"></em>';
+			oS.style.width = oBox.offsetWidth/C+'px';
+			oS.style.height = oBox.offsetHeight/R+'px';
+			oBox.appendChild(oS);
+			oS.style.left = j*oS.offsetWidth+'px';
+			oS.style.top = i*oS.offsetHeight+'px';
+			var oF = oS.children[0];
+			var oB = oS.children[1];
+			oF.style.backgroundPosition = -j*oS.offsetWidth+'px '+-i*oS.offsetHeight+'px';
+			oB.style.backgroundPosition = -j*oS.offsetWidth+'px '+-i*oS.offsetHeight+'px';
+			oS.R = i;
+			oS.C = j;
+		}
+	}
+	var aS = oBox.children;
+	oBtn.onclick = function(){
+		for(var i = 0;i<aS.length;i++){
+			(function(index){
+				setTimeout(function(){
+					aS[index].style.WebkitTransition = '1s all ease';
+					aS[index].style.WebkitTransform = 'perspective(800px) rotateY(180deg) scale(-1,1)';
+				},(aS[i].R+aS[i].C)*100);
+			})(i);
+		}
+	};
+},false);
+</script>
+</head>
+
+<body>
+<input type="button" value="按钮" />
+<div id="box"></div>
+</body>
+</html>

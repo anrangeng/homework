@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0;}
+body{ background:#036;}
+#box { width:200px; height:50px; margin:100px auto; border:1px solid #666; text-align:center; line-height:50px; font-size:28px; position:relative; top:0; left:0;}
+#box .div1{ width:200px; height:50px; position:absolute; top:0; left:0;}
+#box .div2{ width:200px; height:50px; position:absolute; top:0; left:0; -webkit-background-clip:text; color:rgba(0,0,0,0);}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+	var oDiv = document.querySelector('.div2');
+	var i = -30;
+	setInterval(function(){
+		i+=3;
+		oDiv.style.background = '-webkit-linear-gradient(-30deg,rgba(255,255,255,0) '+i+'px,rgba(255,255,255,1) '+(i+20)+'px,rgba(255,255,255,0) '+(i+40)+'px)';
+		oDiv.style.WebkitBackgroundClip = 'text';
+		if(i>230){
+			i=-30;
+		}
+	},30);
+},false);
+</script>
+</head>
+
+<body>
+<div id="box">
+	<div class="div1">移动滑块解锁</div>
+	<div class="div2">移动滑块解锁</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0;}
+#box{ width:300px; height:250px; border:1px solid #666; margin:200px auto; background:#69F; position:relative; top:0; left:0; font-family:"微软雅黑"; overflow:hidden; -webkit-transform:scale(3,3); opacity:0; transition:.4s all ease-in;}
+.close{ width:50px; height:50px; background:#eee; border-radius:50%; position:absolute; top:-25px; right:-25px; cursor:pointer;}
+.close strong{ position:absolute; top:25px; right:27px; color:#000; }
+input{ width:200px; height:30px; background:#eee; position:absolute; left:50%; margin-left:-100px; border-radius:6px; text-indent:50px;}
+.top{ top:70px;}
+.down{ top:110px;}
+.email{ position:absolute; top:78px; left:60px; z-index:10;}
+.psd{ position:absolute; top:118px; left:60px; z-index:10;}
+.login{ display:block; width:200px; height:30px; background:#6F9; text-align:center; line-height:30px; border-radius:6px; position:absolute; bottom:60px; left:50%; margin-left:-100px; color:#fff;}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+	var oA = document.querySelector('a');
+	var oBox = document.querySelector('#box');
+	var oClose = document.querySelector('#box .close');
+	oA.onclick = function(){
+		oBox.style.opacity = 1;
+		oBox.style.WebkitTransform = 'scale(1,1)';
+	};
+	oClose.onclick = function(){
+		oBox.style.opacity = 0;
+		oBox.style.WebkitTransform = 'scale(3,3)';
+	};
+},false);
+</script>
+</head>
+
+<body>
+<a href="javascript:;">登录</a>
+<div id="box">
+	<span class="close"><strong>×</strong></span>
+    <span class="email">邮箱</span>
+	<input class="top" type="text" /><br/>
+    <span class="psd">密码</span>
+    <input class="down" type="password" />
+    <span class="login">登录</span>
+</div>
+</body>
+</html>
